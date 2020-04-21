@@ -1,0 +1,20 @@
+steps:
+  - name: 'gcr.io/kaniko-project/executor:v0.15.0'
+    args:
+      - --dockerfile=$_DOCKERFILE
+      - --destination=gcr.io/$PROJECT_ID/client-api:$BRANCH_NAME
+      - --destination=gcr.io/$PROJECT_ID/client-api:$SHORT_SHA
+      - --destination=gcr.io/$PROJECT_ID/client-api:latest
+      - --cache=true
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - set
+      - image
+      - deployment/pave-go-echo-boilerplate-$_ENV
+      - pave-pave-go-echo-boilerplate-$_ENV=gcr.io/$PROJECT_ID/pave-go-echo-boilerplate:$SHORT_SHA
+      - --namespace
+      - $_NAMESPACE
+    env:
+      - 'CLOUDSDK_COMPUTE_REGION=northamerica-northeast1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=pave-canada'

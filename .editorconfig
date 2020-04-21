@@ -1,0 +1,70 @@
+# For more information about the configurations used
+# in this file, please see the EditorConfig documentation.
+#
+# https://editorconfig.org
+
+root = true
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*]
+
+charset = utf-8
+indent_size = 4
+indent_style = tab
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*.md]
+
+# Markdown uses the trailing whitespaces.
+# https://daringfireball.net/projects/markdown/syntax#block
+
+trim_trailing_whitespace = false
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*.yml]
+
+# For .travis.yml, docker-compose.yml
+
+indent_size = 2
+indent_style = space
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[{*.json,*.json.example,*.gyp,*.yml,*.yaml}]
+indent_style = space
+indent_size = 2
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[{*.py,*.asm}]
+indent_style = space
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*.py]
+indent_size = 4
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*.asm]
+indent_size = 8
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Ideal settings - some plugins might support these.
+[*.js]
+quote_type = single
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[{*.c,*.cc,*.h,*.hh,*.cpp,*.hpp,*.m,*.mm,*.mpp,*.js,*.java,*.go,*.rs,*.php,*.ng,*.jsx,*.ts,*.d,*.cs,*.swift}]
+curly_bracket_next_line = false
+spaces_around_operators = true
+spaces_around_brackets = outside
+# close enough to 1TB
+indent_brace_style = K&R

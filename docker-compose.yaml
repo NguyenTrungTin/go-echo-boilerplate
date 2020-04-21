@@ -1,0 +1,54 @@
+version: "3.5"
+
+services:
+  go-echo-boilerplate:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    container_name: go-echo-boilerplate
+    restart: unless-stopped
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      - PORT=${PORT}
+      - MYSQL_URL=${MYSQL_URL}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    volumes:
+      - .:/app
+      - ./data:/app/data
+    depends_on:
+      - go-echo-mysql
+    tty: true
+    stdin_open: true
+    networks:
+      - go-echo
+
+  go-echo-mysql:
+    image: mysql:latest
+    container_name: go-echo-mysql
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password']
+    cap_add:
+      - SYS_NICE
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - go-echo-mysql:/var/lib/mysql
+    tty: true
+    networks:
+      - go-echo
+
+volumes:
+  go-echo-mysql:
+
+networks:
+  go-echo:
+    name: go-echo
+    driver: bridge

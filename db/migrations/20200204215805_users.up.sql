@@ -1,0 +1,20 @@
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `timezone` varchar(255) DEFAULT NULL,
+  `general_manager` int(10) unsigned DEFAULT NULL,
+  `manager` int(10) unsigned DEFAULT NULL,
+  `status` varchar(255) DEFAULT 'ACTIVE',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `uix_users_email` (`email`),
+  KEY `idx_users_deleted_at` (`deleted_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
